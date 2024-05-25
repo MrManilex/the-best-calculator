@@ -37,3 +37,7 @@ function display() {
     }
 
 }
+
+function clearDisplay() {
+    // this function will be responsible for clearing all entries and memory
+}
