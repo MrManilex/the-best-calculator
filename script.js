@@ -12,6 +12,8 @@ const numberZero = document.getElementById('num-zero')
 // retrieve the number displayer by ID
 const numberDisplayer = document.getElementById('num-displayer')
 
+const clear = document.getElementById('clear')
+
 // add event listeners to when the user clicks on the number div
 numberOne.addEventListener('click', display)
 numberTwo.addEventListener('click', display)
@@ -24,13 +26,14 @@ numberEight.addEventListener('click', display)
 numberNine.addEventListener('click', display)
 numberZero.addEventListener('click', display)
 
+clear.addEventListener('click', clearDisplay)
+
 function display() {
     if (numberDisplayer.innerText == 0) {
         // this asigns the text inside the number displayer as the initial number pressed/clicked on
         numberDisplayer.innerText = this.innerText
     } else if (numberDisplayer.innerText !== 0) {
         // If the second number is pressed.... Append the number pressed.
-        console.log(typeof this.innerText)
         numberDisplayer.innerText += this.innerText
     } else {
         console.log('error')
@@ -40,4 +43,5 @@ function display() {
 
 function clearDisplay() {
     // this function will be responsible for clearing all entries and memory
+    numberDisplayer.innerText = 0
 }
