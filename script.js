@@ -51,7 +51,7 @@ function input() {
         firstInput = false
         return
     }
-    
+
     if (!firstInput) {
         // append the number pressed after the first one was entered
         numDisplayEl.innerText += input
@@ -75,8 +75,8 @@ function sum() {
     entryTwo = numDisplayEl.innerText
 
     // conditionally do calculations based on operator variable
-    if (operator === '+') { add() }
-    if (operator === '-') { subtract() }
+    if (operator === '+' && entryTwo !== '+') { add() }
+    if (operator === '-' && entryTwo !== '-') { subtract() }
 }
 
 function add() {
