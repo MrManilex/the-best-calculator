@@ -9,45 +9,82 @@ const numberEightEl = document.getElementById('num-eight')
 const numberNineEl = document.getElementById('num-nine')
 const numberZeroEl = document.getElementById('num-zero')
 
-const subtractEl= document.getElementById('subtract')
+const clearEl = document.getElementById('clear')
 const addEl = document.getElementById('add')
+const subtractEl = document.getElementById('subtract')
+const sumEl = document.getElementById('sum')
 
 // retrieve the number displayer by ID
 const numDisplayEl = document.getElementById('num-displayer')
 
-const clearEl = document.getElementById('clear')
-
 // add event listeners to when the user clicks on the number div
-numberOneEl.addEventListener('click', display)
-numberTwoEl.addEventListener('click', display)
-numberThreeEl.addEventListener('click', display)
-numberFourEl.addEventListener('click', display)
-numberFiveEl.addEventListener('click', display)
-numberSixEl.addEventListener('click', display)
-numberSevenEl.addEventListener('click', display)
-numberEightEl.addEventListener('click', display)
-numberNineEl.addEventListener('click', display)
-numberZeroEl.addEventListener('click', display)
+numberOneEl.addEventListener('click', input)
+numberTwoEl.addEventListener('click', input)
+numberThreeEl.addEventListener('click', input)
+numberFourEl.addEventListener('click', input)
+numberFiveEl.addEventListener('click', input)
+numberSixEl.addEventListener('click', input)
+numberSevenEl.addEventListener('click', input)
+numberEightEl.addEventListener('click', input)
+numberNineEl.addEventListener('click', input)
+numberZeroEl.addEventListener('click', input)
 
-subtractEl.addEventListener('click', display)
-addEl.addEventListener('click', display)
+clearEl.addEventListener('click', clear)
+addEl.addEventListener('click', operatorAssign)
+subtractEl.addEventListener('click', operatorAssign)
+sumEl.addEventListener('click', sum)
 
-clearEl.addEventListener('click', clearDisplay)
 
-function display() {
-    if (numDisplayEl.innerText == 0) {
-        // this asigns the text inside the number displayer as the initial number pressed/clicked on
-        numDisplayEl.innerText = this.innerText
-    } else if (this.innerText === '+' || this.innerText === '-') {
-        console.log('PRESSED')
-    } else {
-        // If the second number is pressed.... Append the number pressed.
-        numDisplayEl.innerText += this.innerText
+// global variables
+let firstInput = true
+// let secondInput = false
+let entryOne = ''
+let entryTwo = ''
+let operator = ''
+
+function input() {
+    let input = this.innerText
+
+    if (firstInput) {
+        numDisplayEl.innerText = input
+        firstInput = false
+        return
+    }
+
+    if (!firstInput) {
+        numDisplayEl.innerText += input
     }
 
 }
 
-function clearDisplay() {
-    // this function will be responsible for clearing all entries and memory
+function operatorAssign() {
+    entryOne = numDisplayEl.innerText
+    operator = this.innerText
+    numDisplayEl.innerText = operator
+    firstInput = true
+}
+
+function sum() {
+    entryTwo = numDisplayEl.innerText
+
+    if (operator === '+') { add() }
+    if (operator === '-') { subtract() }
+}
+
+function add() {
+    firstInput = true
+    return numDisplayEl.innerText = parseInt(entryOne) + parseInt(entryTwo)
+}
+
+function subtract() {
+    firstInput = true
+    return numDisplayEl.innerText = parseInt(entryOne) - parseInt(entryTwo)
+}
+
+function clear() {
     numDisplayEl.innerText = 0
+    firstInput = true
+    entryOne = ''
+    entryTwo = ''
+    operator = ''
 }
