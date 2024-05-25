@@ -1,3 +1,4 @@
+// retrieve elements and store in constants for manipulation
 const numberOneEl = document.getElementById('num-one')
 const numberTwoEl = document.getElementById('num-two')
 const numberThreeEl = document.getElementById('num-three')
@@ -14,7 +15,6 @@ const addEl = document.getElementById('add')
 const subtractEl = document.getElementById('subtract')
 const sumEl = document.getElementById('sum')
 
-// retrieve the number displayer by ID
 const numDisplayEl = document.getElementById('num-displayer')
 
 // add event listeners to when the user clicks on the number div
@@ -35,44 +35,54 @@ subtractEl.addEventListener('click', operatorAssign)
 sumEl.addEventListener('click', sum)
 
 
-// global variables
+// set global variables
 let firstInput = true
-// let secondInput = false
 let entryOne = ''
 let entryTwo = ''
 let operator = ''
 
 function input() {
+    // store number that was clicked on
     let input = this.innerText
 
+    // here we will decide if this is the first number entered as if you just turned on the calculator or just starting a new calculation
     if (firstInput) {
         numDisplayEl.innerText = input
         firstInput = false
         return
     }
-
+    
     if (!firstInput) {
+        // append the number pressed after the first one was entered
         numDisplayEl.innerText += input
     }
 
 }
 
 function operatorAssign() {
+    // save first entry for calculation
     entryOne = numDisplayEl.innerText
+    // save operator for further reference
     operator = this.innerText
+    // show only the operator that was chosen 
     numDisplayEl.innerText = operator
+    // change firstInput to start entering the next entry/input for calculation
     firstInput = true
 }
 
 function sum() {
+    // save second entry
     entryTwo = numDisplayEl.innerText
 
+    // conditionally do calculations based on operator variable
     if (operator === '+') { add() }
     if (operator === '-') { subtract() }
 }
 
 function add() {
+    // change firstInput to start the next entry/calculation
     firstInput = true
+    // parseInt turns variable from string to number to actually do the calculation. Set the display to show the answer.
     return numDisplayEl.innerText = parseInt(entryOne) + parseInt(entryTwo)
 }
 
@@ -82,6 +92,7 @@ function subtract() {
 }
 
 function clear() {
+    // reset everything
     numDisplayEl.innerText = 0
     firstInput = true
     entryOne = ''
